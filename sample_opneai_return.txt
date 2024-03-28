@@ -1,0 +1,30 @@
+ChatCompletion(
+    id='chatcmpl-97oHqMiJyBmvLxgGFBMiYYLITTTqY', 
+    choices=[
+        Choice(
+            finish_reason='function_call', 
+            index=0, 
+            logprobs=None, 
+            message=ChatCompletionMessage(
+                content=None, 
+                role='assistant', 
+                function_call=FunctionCall(
+                    arguments='{"Population":331002651,
+                                "Capital":"Washington, D.C.",
+                                "States":"Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware, Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana, Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana, Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina, North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina, South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia, Wisconsin, Wyoming"
+                                }', 
+                    name='get_country_details'
+                    ), 
+                tool_calls=None)
+        )
+    ], 
+    created=1711648626, 
+    model='gpt-3.5-turbo-0125', 
+    object='chat.completion', 
+    system_fingerprint='fp_3bc1b5746c', 
+    usage=CompletionUsage(
+            completion_tokens=136, 
+            prompt_tokens=88, 
+            total_tokens=224
+            )
+)

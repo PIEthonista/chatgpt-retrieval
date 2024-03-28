@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 
 import openai
 from langchain.chains import ConversationalRetrievalChain, RetrievalQA
@@ -35,7 +36,7 @@ else:
     index = VectorstoreIndexCreator().from_loaders([loader])
 
 chain = ConversationalRetrievalChain.from_llm(
-  llm=ChatOpenAI(model="gpt-3.5-turbo"),
+  llm=ChatOpenAI(model="gpt-4"),
   retriever=index.vectorstore.as_retriever(search_kwargs={"k": 1}),
 )
 
@@ -50,3 +51,11 @@ while True:
 
   chat_history.append((query, result['answer']))
   query = None
+  
+
+
+
+
+# Meal (Inexpensive Restaurant), Meal for 2 People (Mid-range Restaurant), McMeal at McDonalds (or Equivalent Combo Meal), Domestic Beer (0.5 liter draught), Imported Beer (0.33 liter bottle), Cappuccino (regular), Coke/Pepsi (0.33 liter bottle), Water (0.33 liter bottle),
+
+# Prompt: can you give the exact of Kuala Lumpur's expenses in in terms of the following items' per unit price in RM. Meal (Inexpensive Restaurant), Meal for 2 People (Mid-range Restaurant), McMeal at McDonalds (or Equivalent Combo Meal), Domestic Beer (0.5 liter draught), Imported Beer (0.33 liter bottle), Cappuccino (regular), Coke/Pepsi (0.33 liter bottle), Water (0.33 liter bottle) 
