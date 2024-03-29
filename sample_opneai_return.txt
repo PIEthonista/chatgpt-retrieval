@@ -1,0 +1,121 @@
+ChatCompletion(
+    id='chatcmpl-97oHqMiJyBmvLxgGFBMiYYLITTTqY', 
+    choices=[
+        Choice(
+            finish_reason='function_call', 
+            index=0, 
+            logprobs=None, 
+            message=ChatCompletionMessage(
+                content=None, 
+                role='assistant', 
+                function_call=FunctionCall(
+                    arguments='{"Population":331002651,
+                                "Capital":"Washington, D.C.",
+                                "States":"Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware, Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana, Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana, Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina, North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina, South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia, Wisconsin, Wyoming"
+                                }', 
+                    name='get_country_details'
+                    ), 
+                tool_calls=None)
+        )
+    ], 
+    created=1711648626, 
+    model='gpt-3.5-turbo-0125', 
+    object='chat.completion', 
+    system_fingerprint='fp_3bc1b5746c', 
+    usage=CompletionUsage(
+            completion_tokens=136, 
+            prompt_tokens=88, 
+            total_tokens=224
+            )
+)
+
+
+
+tools = [
+    {
+        “type”: “function”,
+        “function”: {
+            “name”: “get_current_weather”,
+            “description”: “Get the current weather in a given location”,
+            “parameters”: {
+                “type”: “object”,
+                “properties”: {
+                    “location”: {
+                        “type”: “string”,
+                        “description”: “The city and state, e.g. San Francisco, CA”,
+                    },
+                },
+                “required”: [“location”],
+            },
+        },
+    },
+    {
+    “type”: “function”,
+    “function”: {
+    “name”: “get_current_traffic”,
+    “description”: “Get the current traffic in a given location”,
+    “parameters”: {
+    “type”: “object”,
+    “properties”: {
+    “location”: {
+    “type”: “string”,
+    “description”: “The city and state, e.g. San Francisco, CA”,
+    },
+    },
+    “required”: [“location”],
+    },
+    },
+    }
+    ]
+
+    prompt = [
+    {
+    ‘role’: ‘system’,
+    ‘content’: ‘You are a helpful assistant. When the user wants to know the current weather in a given location, call get_current_weather function. When the user wants to know the current traffic situation in a given location, call get_current_traffic function.’
+    },
+    {
+    ‘role’:‘user’,
+    ‘content’: ‘What is the current weather and traffic in Tokyo?’,
+    }
+]
+
+response = client.chat.completions.create(
+                model=“gpt-4-1106-preview”,
+                messages=prompt,
+                temperature=0,
+                tools =tools,
+                tool_choice=“auto”
+                )
+response_message = response
+print(response_message)
+
+
+
+ChatCompletion(
+    id='chatcmpl-981AsJD4jIXcIrR5kX3YBhqNrbo5g', 
+    choices=[
+        Choice(finish_reason='tool_calls', 
+               index=0, 
+               logprobs=None, 
+               message=ChatCompletionMessage(
+                   content=None, 
+                   role='assistant', 
+                   function_call=None, 
+                   tool_calls=[
+                        ChatCompletionMessageToolCall(
+                            id='call_T2sCrJycIdt9lSbFK9ntXTlM', 
+                            function=Function(
+                                arguments='{"start_date":"01-01-2022","end_date":"31-01-2022"}', 
+                                name='acquire_history_data'
+                                ), 
+                            type='function'
+                            )
+                        ]
+                    )
+                )
+    ], 
+    created=1711698166, 
+    model='gpt-3.5-turbo-1106', 
+    object='chat.completion', 
+    system_fingerprint='fp_89448ee5dc', 
+    usage=CompletionUsage(completion_tokens=31, prompt_tokens=242, total_tokens=273))
