@@ -19,7 +19,7 @@ from langchain.agents import Tool
 from api_keys import OPENAI_API_KEY, TAVILY_API_KEY
 from system_prompts import AUTOMATED_EXPENSE_RECORDING_SP, DATA_ANALYSIS_SP, EXPENSE_PREDICTION_SP, REGULAR_CHAT_SP
 from func_call_template import MANDATORY_FUNCTION_CALL_TEMPLATE, FUNCTION_CALL_TEMPLATE
-from model_config import __MODEL__, __MAX_TOKENS__, __TEMPERATURE__, __VERBOSE__, __USER_DATA_PATH__, __MAX_DATE_RANGE__, __DEBUGGING__
+from model_config import __MODEL__, __MAX_TOKENS__, __TEMPERATURE__, __VERBOSE__, __USER_DATA_PATH__, __MAX_DATE_RANGE__, __DEBUGGING__, __MAX_ERROR_TRIAL__
 from utils import get_csv_given_date
 
 
@@ -281,8 +281,10 @@ if __name__ == "__main__":
         # function calls must be in order
         if 'record_user_expenses' in funcs_to_call.keys():
             output = None
-            while output is None:
+            c = 0
+            while (output is None) and (c < __MAX_ERROR_TRIAL__):
                 output = record_user_expenses_income(agent_executor=model_record_user_expense, user_input=prompt)
+                c += 1
             print("\n--- record_user_expenses()") if __DEBUGGING__ else None
             print(output)
             formatted_output = "I recorded your expense/income as follows: " + output
@@ -291,16 +293,20 @@ if __name__ == "__main__":
             
         if 'expense_prediction' in funcs_to_call.keys():
             output = None
-            while output is None:
+            c = 0
+            while (output is None) and (c < __MAX_ERROR_TRIAL__):
                 output = expenses_prediction(client=client, agent_executor=model_expenses_prediction, chat_history=chat_history, user_input=prompt)
+                c += 1
             print("\n--- expenses_prediction()") if __DEBUGGING__ else None
             print(output)
             chat_history.append(AIMessage(content=output))
     
         if 'data_analysis' in funcs_to_call.keys():
             output = None
-            while output is None:
+            c = 0
+            while (output is None) and (c < __MAX_ERROR_TRIAL__):
                 output = data_analysis(client=client, agent_executor=model_data_analysis, chat_history=chat_history, user_input=prompt)
+                c += 1
             print("\n--- data_analysis()") if __DEBUGGING__ else None
             print(output)
             chat_history.append(AIMessage(content=output))
@@ -308,8 +314,10 @@ if __name__ == "__main__":
         # final revert
         if 'regular_chat' in funcs_to_call.keys():
             output = None
-            while output is None:
+            c = 0
+            while (output is None) and (c < __MAX_ERROR_TRIAL__):
                 output = regular_chat(agent_executor=model_regular_chat, chat_history=chat_history, user_input=prompt)
+                c += 1
             print("\n--- regular_chat()") if __DEBUGGING__ else None
             print(output)
             chat_history.append(AIMessage(content=output))

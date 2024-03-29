@@ -11,3 +11,4 @@ __DATA_COLUMN__ =  ["TRANSACTION ID","DATE","TRANSACTION DETAILS","DESCRIPTION",
 __COLS_TO_KEEP__ = [                 "DATE",                      "DESCRIPTION",                            "WITHDRAWAL AMT","DEPOSIT AMT"]
 
 __MAX_DATE_RANGE__ = 15
+__MAX_ERROR_TRIAL__ = 2
