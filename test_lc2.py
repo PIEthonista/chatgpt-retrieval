@@ -36,7 +36,7 @@ from langchain.agents import AgentExecutor
 
 import os
 import sys
-from constants import OPENAI_API_KEY, TAVILY_API_KEY
+from api_keys import OPENAI_API_KEY, TAVILY_API_KEY
 from system_prompts import AUTOMATED_EXPENSE_RECORDING
 
 # true to reveal chain of thought

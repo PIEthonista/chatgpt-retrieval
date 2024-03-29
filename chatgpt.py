@@ -1,3 +1,5 @@
+# pip install langchain openai chromadb tiktoken unstructured
+
 import os
 import sys
 import time
@@ -12,9 +14,9 @@ from langchain.indexes.vectorstore import VectorStoreIndexWrapper
 from langchain.llms import OpenAI
 from langchain.vectorstores import Chroma
 
-import constants
+import api_keys
 
-os.environ["OPENAI_API_KEY"] = constants.APIKEY
+os.environ["OPENAI_API_KEY"] = api_keys.APIKEY
 
 # Enable to save to disk & reuse the model (for repeated queries on the same data)
 PERSIST = False
@@ -29,7 +31,7 @@ if PERSIST and os.path.exists("persist"):
   index = VectorStoreIndexWrapper(vectorstore=vectorstore)
 else:
   #loader = TextLoader("data/data.txt") # Use this line if you only need data.txt
-  loader = DirectoryLoader("data/")
+  loader = DirectoryLoader("vectorstore_data/")
   if PERSIST:
     index = VectorstoreIndexCreator(vectorstore_kwargs={"persist_directory":"persist"}).from_loaders([loader])
   else:
