@@ -35,7 +35,7 @@ from langchain.agents import create_openai_functions_agent
 from langchain.agents import AgentExecutor
 
 import os
-from constants import OPENAI_API_KEY, TAVILY_API_KEY
+from api_keys import OPENAI_API_KEY, TAVILY_API_KEY
 
 
 llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model="gpt-3.5-turbo")

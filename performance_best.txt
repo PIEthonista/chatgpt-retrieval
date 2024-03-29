@@ -1,0 +1,306 @@
+(langchain) 🎃 gohyixian chatgpt-retrieval % python main.py
+>>> Prompt: i grow up in kedah, and my past expenses are all done in kedah. based on my past expense last 2 weeks, how will it be if i move to kuala lumpur?
+expense_prediction -> 
+--- model return date
+--- selected date {'start_date': '15-03-2024', 'end_date': '29-03-2024'}
+--- data_csv
+       DATE                                                                                                           DESCRIPTION  WITHDRAWAL AMT  DEPOSIT AMT
+2024-03-15                                                                   Fees for licenses required for entertainment events           82.00          NaN
+2024-03-15                                                                     Charges for disabled parking permits (Blue Badge)           28.00          NaN
+2024-03-15                                                        Charges related to the regeneration or redevelopment of assets          731.82          NaN
+2024-03-15                                                                             Fees for planning applications or permits          892.00          NaN
+2024-03-15                                                        Charges related to the regeneration or redevelopment of assets          731.82          NaN
+2024-03-15                                                                             Fees for planning applications or permits          892.00          NaN
+2024-03-15                                                            Fees for maintenance and development of roads and highways           68.00          NaN
+2024-03-15                                                                     Charges for disabled parking permits (Blue Badge)          863.30          NaN
+2024-03-15                                                                             Fees for planning applications or permits           42.00          NaN
+2024-03-15                                                                     Charges for disabled parking permits (Blue Badge)          863.30          NaN
+2024-03-15                                                                                   Fines issued for parking violations          189.00          NaN
+2024-03-15                                                                 Local government tax levied on residential properties          684.00          NaN
+2024-03-15                                                            Fees for maintenance and development of roads and highways           68.00          NaN
+2024-03-16                                                                                    Transfer of funds from Bank Rakyat             NaN      20000.0
+2024-03-16                                                                                   Fines issued for parking violations          948.88          NaN
+2024-03-16                                                                                     Transfer of funds from Bank Islam             NaN      20000.0
+2024-03-16                                                                                    Transfer of funds from Bank Rakyat             NaN      20000.0
+2024-03-16                                                                                     Transfer of funds from Bank Islam             NaN      20000.0
+2024-03-16                                                                               Charges for services provided by Leodis           19.00          NaN
+2024-03-16                                                                                    Transfer of funds from Bank Rakyat             NaN      20000.0
+2024-03-16                                                                                    Transfer of funds from Bank Rakyat             NaN      20000.0
+2024-03-16                                                            Fees for maintenance and development of roads and highways           68.00          NaN
+2024-03-16                                                                                    Transfer of funds from Bank Rakyat             NaN      20000.0
+2024-03-16                                                                               Charges for services provided by Leodis          217.00          NaN
+2024-03-16                                                                                    Transfer of funds from Bank Rakyat             NaN      20000.0
+2024-03-16                                                                                     Transfer of funds from Bank Islam             NaN      20000.0
+2024-03-16                                                                                   Fines issued for parking violations          948.88          NaN
+2024-03-16                                                                                     Transfer of funds from Bank Islam             NaN      20000.0
+2024-03-16                                                                                   Fines issued for parking violations          948.88          NaN
+2024-03-16                                                                                    Transfer of funds from Bank Rakyat             NaN      20000.0
+2024-03-16                                                                     Charges for disabled parking permits (Blue Badge)          863.30          NaN
+2024-03-16                                                                             Fees for planning applications or permits           42.00          NaN
+2024-03-16                                                                     Charges for disabled parking permits (Blue Badge)          863.30          NaN
+2024-03-16                                                                     Charges for disabled parking permits (Blue Badge)          863.30          NaN
+2024-03-16                                                                             Fees for planning applications or permits           42.00          NaN
+2024-03-17                                                                             Fees for planning applications or permits           42.00          NaN
+2024-03-17                                                                     Charges for disabled parking permits (Blue Badge)          863.30          NaN
+2024-03-17                                                                             Fees for planning applications or permits           42.00          NaN
+2024-03-17                                                                             Fees for planning applications or permits           42.00          NaN
+2024-03-17                                                                      Fees for fleet vehicle maintenance and services.          759.00          NaN
+2024-03-17                                                                     Charges for disabled parking permits (Blue Badge)           68.00          NaN
+2024-03-17                                                                         Charges for electoral and local land services          992.00          NaN
+2024-03-18                                                                     Charges for disabled parking permits (Blue Badge)           68.00          NaN
+2024-03-18                                                                      Fees for fleet vehicle maintenance and services.          772.00          NaN
+2024-03-18                                                                      Fees for fleet vehicle maintenance and services.           89.00          NaN
+2024-03-18                                                                                   Fines issued for parking violations          894.00          NaN
+2024-03-18                                                                      Fees for fleet vehicle maintenance and services.           89.00          NaN
+2024-03-18                                                        Charges related to the regeneration or redevelopment of assets          321.00          NaN
+2024-03-18                                                            Fees for maintenance and development of roads and highways          753.00          NaN
+2024-03-18                                                Taxes imposed on non-residential properties used for business purposes          675.00          NaN
+2024-03-18                                                Taxes imposed on non-residential properties used for business purposes          675.00          NaN
+2024-03-18                                                                     Charges for disabled parking permits (Blue Badge)          659.00          NaN
+2024-03-18                                                                      Fees for fleet vehicle maintenance and services.          143.00          NaN
+2024-03-18                                                                                                           Unspecified           44.00          NaN
+2024-03-18                                                                      Fees for fleet vehicle maintenance and services.          143.00          NaN
+2024-03-18                                                        Charges related to the regeneration or redevelopment of assets          321.00          NaN
+2024-03-19                                                                                           Fees for childcare services           89.00          NaN
+2024-03-19                                                                         Charges for electoral and local land services          447.43          NaN
+2024-03-19                                                                                           Fees for childcare services           89.00          NaN
+2024-03-19                                                                               Charges for services provided by Leodis          320.04          NaN
+2024-03-19                                                                               Charges for services provided by Leodis          320.04          NaN
+2024-03-19                                                                               Charges for services provided by Leodis           63.00          NaN
+2024-03-19                                                                                                     Charges for meals          465.69          NaN
+2024-03-19                                                                             Fees for planning applications or permits          102.00          NaN
+2024-03-19                                                                     Charges for disabled parking permits (Blue Badge)           72.00          NaN
+2024-03-19                                                                                                           Unspecified           67.00          NaN
+2024-03-19                                                                Charges for access to parks and countryside facilities           97.00          NaN
+2024-03-19                                                                                   Fines issued for parking violations          894.00          NaN
+2024-03-19                                                                                   Fines issued for parking violations          894.00          NaN
+2024-03-19                                                                                                           Unspecified           67.00          NaN
+2024-03-19                                                                                                     Charges for meals          465.69          NaN
+2024-03-20                                                                Charges for access to parks and countryside facilities           97.00          NaN
+2024-03-20                                                                   Fees for licenses required for entertainment events          385.00          NaN
+2024-03-20                                                                     Charges for disabled parking permits (Blue Badge)           72.00          NaN
+2024-03-20                                                                                    Transfer of funds from Bank Rakyat             NaN      50000.0
+2024-03-20                                                                                                           Unspecified           67.00          NaN
+2024-03-20                                                                             Fees for planning applications or permits          102.00          NaN
+2024-03-20                                                                                   Fines issued for parking violations          894.00          NaN
+2024-03-20                                                                   Fees for licenses required for entertainment events          151.22          NaN
+2024-03-20                                                                         Charges for electoral and local land services          214.00          NaN
+2024-03-21                                                                             Fees for planning applications or permits           41.99          NaN
+2024-03-21                                                                                   Fines issued for parking violations           56.00          NaN
+2024-03-21                                                                             Fees for planning applications or permits           41.99          NaN
+2024-03-21                                                          Charges related to the use of the Leeds Card loyalty program          859.51          NaN
+2024-03-22                                                                             Fees for planning applications or permits          173.35          NaN
+2024-03-22                                                                             Fees for planning applications or permits           41.99          NaN
+2024-03-22                                                                                   Fines issued for parking violations           56.00          NaN
+2024-03-22                                                                         Charges for electoral and local land services          599.00          NaN
+2024-03-22                                                                   Fees for licenses required for entertainment events          600.00          NaN
+2024-03-22                                                        Charges related to the regeneration or redevelopment of assets          731.82          NaN
+2024-03-22                                                                             Fees for planning applications or permits          173.35          NaN
+2024-03-23                                                                                           Fees for childcare services          431.00          NaN
+2024-03-23                                                                                                           Unspecified          162.21          NaN
+2024-03-23                                                            Fees for maintenance and development of roads and highways          743.00          NaN
+2024-03-23                                                                         Rent payments for commercial or market spaces             NaN        870.0
+2024-03-23 Charges for various city and environmental services such as waste management, recycling, and environmental protection          778.00          NaN
+2024-03-23                                                        Charges related to the regeneration or redevelopment of assets          654.25          NaN
+2024-03-23                                                            Admission fees or charges for services provided by museums           50.00          NaN
+2024-03-23                                                                         Charges for electoral and local land services          921.00          NaN
+2024-03-23                                                                             Fees for planning applications or permits           51.00          NaN
+2024-03-23 Charges for various city and environmental services such as waste management, recycling, and environmental protection          778.00          NaN
+2024-03-24                                                                             Fees for planning applications or permits           51.00          NaN
+2024-03-24                                                              Miscellaneous outstanding debts owed to the organization          810.00          NaN
+2024-03-24                                                              Miscellaneous outstanding debts owed to the organization          810.00          NaN
+2024-03-24                                                                               Charges for services provided by Leodis          633.00          NaN
+2024-03-24                                                                                    Transfer of funds from Bank Rakyat             NaN       4000.0
+2024-03-24                                                                            Rental payments for housing accommodations         1100.00          NaN
+2024-03-24                                                                               Charges for services provided by Leodis          506.00          NaN
+2024-03-24                                                                            Rental payments for housing accommodations         1100.00          NaN
+2024-03-24                                                                Charges for access to parks and countryside facilities          358.00          NaN
+2024-03-24                                                                Charges for access to parks and countryside facilities          358.00          NaN
+2024-03-24                                                        Charges related to the regeneration or redevelopment of assets          193.00          NaN
+2024-03-24                                                        Charges related to the regeneration or redevelopment of assets          193.00          NaN
+2024-03-24                                                        Charges related to the regeneration or redevelopment of assets          193.00          NaN
+2024-03-25                                                                                                     Charges for meals          382.68          NaN
+2024-03-25                                                                                                           Unspecified          335.00          NaN
+2024-03-25                                                                      Fees for fleet vehicle maintenance and services.          335.00          NaN
+2024-03-25                                                          Charges related to the use of the Leeds Card loyalty program          285.00          NaN
+2024-03-25                                                                                   Fines issued for parking violations          672.00          NaN
+2024-03-25                                                          Charges related to the use of the Leeds Card loyalty program          285.00          NaN
+2024-03-25                                                              Miscellaneous outstanding debts owed to the organization          227.30          NaN
+2024-03-26                                                        Charges related to the regeneration or redevelopment of assets          894.00          NaN
+2024-03-26                                                                                       Payments towards mortgage loans          970.00          NaN
+2024-03-26                                                                                       Payments towards mortgage loans          970.00          NaN
+2024-03-26                                                Taxes imposed on non-residential properties used for business purposes          813.00          NaN
+2024-03-26                                                                                   Fines issued for parking violations          726.00          NaN
+2024-03-26                                                                                   Fines issued for parking violations          726.00          NaN
+2024-03-26                                                Taxes imposed on non-residential properties used for business purposes          813.00          NaN
+2024-03-26                                                                     Charges for disabled parking permits (Blue Badge)          695.00          NaN
+2024-03-26                                                        Charges related to the regeneration or redevelopment of assets          286.00          NaN
+2024-03-26                                                        Charges related to the regeneration or redevelopment of assets          286.00          NaN
+2024-03-26                                                        Charges related to the regeneration or redevelopment of assets          286.00          NaN
+2024-03-26 Charges for various city and environmental services such as waste management, recycling, and environmental protection           91.00          NaN
+2024-03-27                                                                         Charges for electoral and local land services          255.00          NaN
+2024-03-27                                                              Miscellaneous outstanding debts owed to the organization          898.00          NaN
+2024-03-27                                                              Miscellaneous outstanding debts owed to the organization          898.00          NaN
+2024-03-27                                                              Miscellaneous outstanding debts owed to the organization          898.00          NaN
+2024-03-27                                                              Miscellaneous outstanding debts owed to the organization          898.00          NaN
+2024-03-27                                                                      Fees for fleet vehicle maintenance and services.          811.00          NaN
+2024-03-27                                                              Miscellaneous outstanding debts owed to the organization          898.00          NaN
+2024-03-27                                                                                                     Charges for meals          777.00          NaN
+2024-03-27                                                                     Charges for disabled parking permits (Blue Badge)          695.00          NaN
+2024-03-27                                                            Fees for maintenance and development of roads and highways           77.00          NaN
+2024-03-28                                                                                           Fees for childcare services           42.00          NaN
+2024-03-28                                                            Fees for maintenance and development of roads and highways           77.00          NaN
+2024-03-28                                                                                                           Unspecified          551.81          NaN
+2024-03-28                                                                                                     Charges for meals          138.00          NaN
+2024-03-28                                                                Charges for access to parks and countryside facilities          605.00          NaN
+2024-03-28                                                            Fees for maintenance and development of roads and highways           77.00          NaN
+2024-03-28                                                            Fees for maintenance and development of roads and highways           77.00          NaN
+2024-03-28                                                Taxes imposed on non-residential properties used for business purposes           88.00          NaN
+2024-03-28                                                                         Charges for electoral and local land services          607.00          NaN
+2024-03-28                                                                                   Fines issued for parking violations          315.00          NaN
+2024-03-28                                                                     Charges for disabled parking permits (Blue Badge)          481.75          NaN
+2024-03-28                                                                Charges for access to parks and countryside facilities          605.00          NaN
+2024-03-28                                                         Charges for repairs and replacement of keys for housing units          234.00          NaN
+2024-03-28                                                         Charges for repairs and replacement of keys for housing units          234.00          NaN
+2024-03-28                                                                     Charges for disabled parking permits (Blue Badge)          481.75          NaN
+2024-03-28                                                                                           Fees for childcare services          399.00          NaN
+2024-03-28                                                                                                           Unspecified           65.00          NaN
+2024-03-28                                                          Charges related to the use of the Leeds Card loyalty program          366.00          NaN
+2024-03-28                                                                                                           Unspecified           65.00          NaN
+2024-03-28                                                          Charges related to the use of the Leeds Card loyalty program          366.00          NaN
+2024-03-28                                                                      Fees for fleet vehicle maintenance and services.          982.00          NaN
+2024-03-28                                                                      Fees for fleet vehicle maintenance and services.          982.00          NaN
+2024-03-28                                                              Miscellaneous outstanding debts owed to the organization          162.00          NaN
+2024-03-28                                                                     Charges for disabled parking permits (Blue Badge)          845.87          NaN
+2024-03-28                                                                      Fees for fleet vehicle maintenance and services.          982.00          NaN
+2024-03-28                                                        Charges related to the regeneration or redevelopment of assets           92.00          NaN
+2024-03-28                                                                Charges for access to parks and countryside facilities          802.97          NaN
+2024-03-28                                                                 Local government tax levied on residential properties          667.00          NaN
+2024-03-29                                                                         Charges for electoral and local land services          178.00          NaN
+2024-03-29                                                                   Fees for licenses required for entertainment events          600.00          NaN
+2024-03-29                                                        Charges related to the regeneration or redevelopment of assets           92.00          NaN
+2024-03-29                                                                                                           Unspecified          469.08          NaN
+2024-03-29                                   Fees for various services provided to children, such as childcare or youth programs          830.00          NaN
+2024-03-29                                   Fees for various services provided to children, such as childcare or youth programs          830.00          NaN
+2024-03-29                                                                                                           Unspecified          703.98          NaN
+
+--- expenses_prediction()
+Based on the data sourced from various cost of living indices, it is estimated that living expenses in Kuala Lumpur are approximately 42.7% to 55.5% higher than in Kedah. These expenses include categories such as food, housing, transportation, entertainment, and more. 
+
+In terms of rent, the costs in Kuala Lumpur are approximately 114.2% higher than in Kedah. This means that if you're planning to rent a place in Kuala Lumpur, you might have to allocate more than double the amount you used to spend in Kedah for this purpose.
+
+Therefore, if we apply these percentages to your recent 2 weeks expenses, you can expect a significant increase in your living expenses should you decide to move to Kuala Lumpur. Please note that these are rough estimations and actual costs may vary depending on your lifestyle and consumption habits.
+>>> Prompt: are you aware of gxbank?                                    
+regular_chat -> 
+
+--- regular_chat()
+Yes, I am aware of GXBank. It is the first digital bank in Malaysia to receive approval from Bank Negara Malaysia. GXBank aims to serve unserved and underserved individuals as well as MSMEs by leveraging technology and innovation. 
+
+Some of the key features of GXBank include:
+
+- Fast account opening
+- Instant cashback
+- Cashback on GrabUnlimited subscription when you link your GX Account
+- 3% p.a. daily interest on savings
+- Unlimited cashback debit card
+- Grab rewards
+- 24/7 customer support through in-app live chat and a support hotline
+
+It is also noteworthy that GXBank is a subsidiary of Singapore's GXS Bank, which is a joint venture between Grab and Singtel, along with a consortium of other Malaysian investors, including the Kuok Group.
+
+You can download the GXBank app from Google Play Store and open an account in minutes. For more information, you can visit their website or contact their support hotline.
+>>> Prompt: what is gxbank known for among malaysians?
+regular_chat -> 
+
+--- regular_chat()
+GXBank, as the first digital bank in Malaysia, is known for various reasons among Malaysians:
+
+1. Innovative Banking: Being the first digital bank in Malaysia, GXBank is known for its innovative banking solutions. They aim to leverage technology and innovation to serve unserved and underserved individuals as well as MSMEs.
+
+2. Convenience: With their digital banking platform, GXBank offers fast account opening, instant cashback, and 24/7 customer support through in-app live chat and a support hotline. This convenience is highly appreciated by users who prefer online banking.
+
+3. Beta Testing: In its early stages, GXBank began testing its services with a limited beta. Some 20,000 applicants were given access to the GXBank app, allowing them to experience what the bank had to offer before it was fully rolled out to the public.
+
+4. Collaboration: GXBank is a joint venture between Grab Holdings Limited and Singapore Telecommunications Ltd (Singtel), along with a consortium of other Malaysian investors, including Kuok Group. This collaboration has brought about a unique banking experience for Malaysians.
+
+Please note that public opinion may vary, and it's always best to do your own research or ask current users for their experiences.
+>>> Prompt: i am a fan of uniqlo, is there any ways that i can reduce my expenses on uniqlo for the same product that i want to purchase. is there any promotions or financial products that i can subscribe to in order to reduce my expenses on such items. for example, gxbank?
+regular_chat -> 
+
+--- regular_chat()
+Based on my research, here are some ways you can save on your purchases from Uniqlo:
+
+1. **Limited-Time Promotions**: Uniqlo often runs limited-time promotions on their website. These promotions offer discounts on various items and could help you save money on your purchases.
+
+2. **Multi-Buy Offers**: Uniqlo has multi-buy offers on essential styles. For example, you can buy 2 items for a discounted price. These offers are a great way to save if you're planning on buying multiple items.
+
+As for GXBank, there are a few promotions currently ongoing that you may be interested in:
+
+1. **Opening Promotion**: As part of their opening promotion, GXBank is offering RM20 cashback with every RM 100 deposit or more. You can also get an additional RM8 when you register your GXBank account with Duitnow.
+
+2. **Saving Pockets Campaign**: GXBank has a Saving Pockets campaign that offers 5% interest per annum for your savings. The promotion will only run for one month from 10th April until 9th of May 2024.
+
+Remember, the key to saving money is to keep an eye out for promotions and make the most of them when they're available.
+>>> Prompt: any other ways other than gxbank? any other financial products?
+regular_chat -> 
+
+--- regular_chat()
+Certainly! There are other financial products and strategies that you can consider to save money on your Uniqlo purchases:
+
+1. **Credit Cards with Cash Back or Rewards**: Many banks offer credit cards that provide cash back or reward points for every purchase made. Some banks also have partnership deals with specific retail brands for additional discounts or rewards. Check if your bank offers such benefits for shopping at Uniqlo.
+
+2. **Gift Cards**: Sometimes, you can find discounted Uniqlo gift cards for sale online. This can be an effective way to save money on your purchases.
+
+3. **Loyalty Programs**: Uniqlo has a loyalty program called UNIQLO MY where you can earn points on every purchase, which can be redeemed for discounts on future purchases.
+
+4. **Shopping Portals**: Online shopping portals sometimes offer cash back, points or miles for purchases made through their site. Check websites like Rakuten, TopCashback, or ShopBack to see if they have any ongoing promotions for Uniqlo.
+
+5. **Sale and Clearance Items**: Always keep an eye on sale and clearance sections on Uniqlo's website or in stores. You can often find great deals here.
+
+Remember to always pay your credit card balance in full each month to avoid paying interest, which could negate any savings you've earned.
+>>> Prompt: can you provide a more specific provider?
+regular_chat -> 
+
+--- regular_chat()
+Based on my research, here are a few specific credit cards that might help you save on your Uniqlo purchases:
+
+1. **RHB Shell Visa Credit Card**: This card offers up to 12% cashback for petrol spend at Shell, and it's suitable for those with a minimum monthly income requirement of RM2,000. While the cashback is specific to Shell petrol, RHB often has other promotional offers that may include shopping discounts.
+
+2. **Maybank 2 Cards**: This pair of cards, the Maybank 2 American Express and the Maybank 2 Mastercard/Visa, provides 5% cashback on all weekend spending (including online transactions), both locally and overseas, and 5x TreatsPoints for every RM1 spent on weekdays. 
+
+3. **Alliance Bank Visa Signature**: This card is versatile and well-suited for those who value a mix of travel perks, cashback, and lifestyle rewards. Alliance Bank often has promotional offers for shopping as well.
+
+Please note that the benefits and features of these credit cards can change over time, and it's always a good idea to check with the bank for the latest information. Always remember to use credit responsibly and pay off your balance in full each month to avoid interest charges.
+>>> Prompt: what are the banks that are currently providing discouunts to uniqlo as of now?
+regular_chat -> 
+
+--- regular_chat()
+Based on my search, here are the recent promotions related to Uniqlo purchases:
+
+1. **GrabPay Promotion**: You can enjoy RM10 off your purchase above RM100 at the UNIQLO Online Store by using GrabPay and the code "GPUNIQLO". Please note that this offer ended on 28th March 2024.
+
+2. **UNIQLO AEON Mall Cheras Selatan Opening**: If you happen to be near AEON Mall Cheras Selatan, UNIQLO's grand opening there had store-exclusive deals and free gifts with purchase from 8-14 March 2024.
+
+Unfortunately, there are no specific bank promotions for Uniqlo mentioned in the search results. It's always a good idea to check with your bank or the Uniqlo website for the latest promotions. Banks periodically offer promotions with retail partners, so there might be upcoming offers in the future.
+>>> Prompt: what is the current stock market price for APL?
+regular_chat -> 
+
+--- regular_chat()
+As of Friday, March 29, 2024, the latest stock market price for Apple Inc. (AAPL) is $189.90. Please note that stock prices can fluctuate rapidly, so it's always good to check for the latest prices before making any investment decisions.
+>>> Prompt: is there any international prepaid card that offers better transaction rates compared to Wisecard?
+regular_chat -> 
+
+--- regular_chat()
+Based on my search results, the following international prepaid cards might offer competitive transaction rates:
+
+1. **Netspend**: This card is ideal for international travel, especially if you plan to deposit cash and checks while traveling. With over 130,000 physical reload locations worldwide and options to add funds electronically, it's convenient for accessing your money while traveling.
+
+2. **N26**: This is a well-known neobank in Europe, and its debit card operates in euros only. However, N26 is a partner with Wise (formerly known as TransferWise) and has fully integrated Wise's technology so that you never have to pay foreign transaction fees on your purchases outside of the eurozone. While N26 does not have multi-currency functionality, N26 will apply the real exchange rate.
+
+3. **Discover® Cashback Debit**: This card is one of the most widely available prepaid travel cards in the U.S. It offers cashback on purchases, which can help offset any transaction fees.
+
+4. **PayPal Prepaid Card**: This card allows you to add money from your bank, by direct deposit or in person at a physical location. You can earn cash back and rewards with PayPal partner merchants. However, a 4% foreign transaction fee applies to international spending.
+
+Remember, it's crucial to compare not just transaction rates but also other factors like ATM withdrawal fees, monthly fees, and the ease of reloading the card. It's also recommended to check the latest information from the card providers as conditions and rates can change.
+
+>>> Prompt: 
