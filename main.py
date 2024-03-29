@@ -12,27 +12,15 @@ from langchain.agents import create_openai_functions_agent
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain.agents import AgentExecutor
 
+from langchain.chains import LLMMathChain 
+from langchain.agents import Tool
+
 
 from api_keys import OPENAI_API_KEY, TAVILY_API_KEY
 from system_prompts import AUTOMATED_EXPENSE_RECORDING_SP, DATA_ANALYSIS_SP, EXPENSE_PREDICTION_SP, REGULAR_CHAT_SP
 from func_call_template import MANDATORY_FUNCTION_CALL_TEMPLATE, FUNCTION_CALL_TEMPLATE
-from model_config import __MODEL__, __MAX_TOKENS__, __TEMPERATURE__, __VERBOSE__, __USER_DATA_PATH__
+from model_config import __MODEL__, __MAX_TOKENS__, __TEMPERATURE__, __VERBOSE__, __USER_DATA_PATH__, __MAX_DATE_RANGE__, __DEBUGGING__
 from utils import get_csv_given_date
-
-
-
-# prompt = 'i had a meal at Mac D today. Had a fish fillet for RM7.90, oh and another ice cream for 1. i also went shopping and clubbing with my friends after that. I think i spent around 75 overall for that'
-# prompt = '''
-# Cause we were just kids when we fell in love
-# Not knowing what it was
-# I will not give you up this time
-# But darling, just kiss me slow
-# Your heart is all I own
-# And in your eyes, you're holding mine
-# Baby, I'm dancing in the dark
-# With you between my arms
-# '''
-# prompt = "Hi who is the current sultan of malaysia?"
 
 
 
@@ -65,16 +53,16 @@ def get_start_end_date_for_history(client: OpenAI, user_input):
     # if no date specified
     if not completion.choices[0].message.tool_calls[0].function.name and not completion.choices[0].message.tool_calls[0].function.arguments:
         current_date = datetime.datetime.now()
-        one_month_ago = current_date - datetime.timedelta(days=30)
+        one_month_ago = current_date - datetime.timedelta(days=__MAX_DATE_RANGE__)
         formatted_current_date = current_date.strftime("%d-%m-%Y")
         formatted_one_month_ago = one_month_ago.strftime("%d-%m-%Y")
-        print("--- calculating date")
+        print("--- calculating date") if __DEBUGGING__ else None
         return {
                     "start_date": formatted_one_month_ago, 
                     "end_date": formatted_current_date
                }
     else:
-        print("--- model return date")
+        print("--- model return date") if __DEBUGGING__ else None
         return json.loads(completion.choices[0].message.tool_calls[0].function.arguments)
 
 
@@ -89,9 +77,16 @@ def init_record_user_expense_income_model():
             MessagesPlaceholder("agent_scratchpad"),
         ]
     )
+
     os.environ["TAVILY_API_KEY"] = TAVILY_API_KEY
     search = TavilySearchResults()
-    tools = [search]      # must at least has a tool for agent. solution: dont use agent?
+    
+    problem_chain = LLMMathChain.from_llm(llm=llm_record)
+    math_tool = Tool.from_function(name="Calculator",
+                    func=problem_chain.run,
+                    description="Useful for when you need to answer questions about math. This tool is only for math questions and nothing else. Only input math expressions. Must use this tool whenever end user prompts anythign related to math.")
+    
+    tools = [search, math_tool]      # must at least has a tool for agent. solution: dont use agent?
     agent = create_openai_functions_agent(llm_record, tools, prompt_template)
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=__VERBOSE__)
     return agent_executor
@@ -100,12 +95,15 @@ def init_record_user_expense_income_model():
 def record_user_expenses_income(agent_executor:AgentExecutor, user_input):
     formatted_input = "The current datetime is " + datetime.datetime.now().strftime("%A, %B %d, %Y %H:%M:%S") + ". " + user_input
     chat_history = []  # not required here
-    response = agent_executor.invoke({
-        "chat_history": chat_history,
-        "input": formatted_input
-    })
-    output = response['output']
-    return output
+    try:
+        response = agent_executor.invoke({
+            "chat_history": chat_history,
+            "input": formatted_input
+        })
+        output = response['output']
+        return output
+    except:
+        return None
 
 
 
@@ -119,9 +117,16 @@ def init_regular_chat_model():
             MessagesPlaceholder("agent_scratchpad"),
         ]
     )
+
     os.environ["TAVILY_API_KEY"] = TAVILY_API_KEY
     search = TavilySearchResults()
-    tools = [search]      # must at least has a tool for agent. solution: dont use agent?
+    
+    problem_chain = LLMMathChain.from_llm(llm=llm_chat)
+    math_tool = Tool.from_function(name="Calculator",
+                    func=problem_chain.run,
+                    description="Useful for when you need to answer questions about math. This tool is only for math questions and nothing else. Only input math expressions. Must use this tool whenever end user prompts anythign related to math.")
+    
+    tools = [search, math_tool]      # must at least has a tool for agent. solution: dont use agent?
     agent = create_openai_functions_agent(llm_chat, tools, prompt_template)
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=__VERBOSE__)
     return agent_executor
@@ -129,12 +134,15 @@ def init_regular_chat_model():
 
 def regular_chat(agent_executor: AgentExecutor, chat_history, user_input):
     formatted_input = "The current datetime is " + datetime.datetime.now().strftime("%A, %B %d, %Y %H:%M:%S") + ". " + user_input
-    response = agent_executor.invoke({
-        "chat_history": chat_history,
-        "input": formatted_input
-    })
-    output = response['output']
-    return output
+    try:
+        response = agent_executor.invoke({
+            "chat_history": chat_history,
+            "input": formatted_input
+        })
+        output = response['output']
+        return output
+    except:
+        return None
 
 
 def init_data_analysis_model():
@@ -147,9 +155,16 @@ def init_data_analysis_model():
             MessagesPlaceholder("agent_scratchpad"),
         ]
     )
+
     os.environ["TAVILY_API_KEY"] = TAVILY_API_KEY
     search = TavilySearchResults()
-    tools = [search]      # must at least has a tool for agent. solution: dont use agent?
+    
+    problem_chain = LLMMathChain.from_llm(llm=llm_data_analysis)
+    math_tool = Tool.from_function(name="Calculator",
+                    func=problem_chain.run,
+                    description="Useful for when you need to answer questions about math. This tool is only for math questions and nothing else. Only input math expressions. Must use this tool whenever end user prompts anythign related to math.")
+    
+    tools = [search, math_tool]      # must at least has a tool for agent. solution: dont use agent?
     agent = create_openai_functions_agent(llm_data_analysis, tools, prompt_template)
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=__VERBOSE__)
     return agent_executor
@@ -158,18 +173,21 @@ def init_data_analysis_model():
 def data_analysis(client: OpenAI, agent_executor: AgentExecutor, chat_history, user_input):
     # call acquire history data
     date_dict = get_start_end_date_for_history(client=client, user_input=user_input)
-    print("--- selected date", date_dict)
+    print("--- selected date", date_dict) if __DEBUGGING__ else None
     data_csv = get_csv_given_date(csv_path=__USER_DATA_PATH__, start_date=date_dict['start_date'], end_date=date_dict['end_date'])
-    print("--- data_csv\n", data_csv)
+    print("--- data_csv\n", data_csv) if __DEBUGGING__ else None
     
     contexted_input = "The current datetime is " + datetime.datetime.now().strftime("%A, %B %d, %Y %H:%M:%S") + ". " \
                       + user_input + "User's past expense data are as follows: " + data_csv
-    response = agent_executor.invoke({
-        "chat_history": chat_history,
-        "input": contexted_input
-    })
-    output = response['output']
-    return output
+    try:
+        response = agent_executor.invoke({
+            "chat_history": chat_history,
+            "input": contexted_input
+        })
+        output = response['output']
+        return output
+    except:
+        return None
 
 
 def init_expenses_prediction_model():
@@ -182,9 +200,16 @@ def init_expenses_prediction_model():
             MessagesPlaceholder("agent_scratchpad"),
         ]
     )
+
     os.environ["TAVILY_API_KEY"] = TAVILY_API_KEY
     search = TavilySearchResults()
-    tools = [search]      # must at least has a tool for agent. solution: dont use agent?
+    
+    problem_chain = LLMMathChain.from_llm(llm=llm_expense_prediction)
+    math_tool = Tool.from_function(name="Calculator",
+                    func=problem_chain.run,
+                    description="Useful for when you need to answer questions about math. This tool is only for math questions and nothing else. Only input math expressions. Must use this tool whenever end user prompts anythign related to math.")
+    
+    tools = [search, math_tool]      # must at least has a tool for agent. solution: dont use agent?
     agent = create_openai_functions_agent(llm_expense_prediction, tools, prompt_template)
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=__VERBOSE__)
     return agent_executor
@@ -193,18 +218,21 @@ def init_expenses_prediction_model():
 def expenses_prediction(client: OpenAI, agent_executor: AgentExecutor, chat_history, user_input):
     # call acquire history data
     date_dict = get_start_end_date_for_history(client=client, user_input=user_input)
-    print("--- selected date", date_dict)
+    print("--- selected date", date_dict) if __DEBUGGING__ else None
     data_csv = get_csv_given_date(csv_path=__USER_DATA_PATH__, start_date=date_dict['start_date'], end_date=date_dict['end_date'])
-    print("--- data_csv\n", data_csv)
+    print("--- data_csv\n", data_csv) if __DEBUGGING__ else None
     
     contexted_input = "The current datetime is " + datetime.datetime.now().strftime("%A, %B %d, %Y %H:%M:%S") + ". " \
                       + user_input + "User's past expense data are as follows: " + data_csv
-    response = agent_executor.invoke({
-        "chat_history": chat_history,
-        "input": contexted_input
-    })
-    output = response['output']
-    return output
+    try:
+        response = agent_executor.invoke({
+            "chat_history": chat_history,
+            "input": contexted_input
+        })
+        output = response['output']
+        return output
+    except:
+        return None
 
 
 # print(completion.choices[0].message.function_call.name)
@@ -244,40 +272,45 @@ if __name__ == "__main__":
             funcs_to_call['regular_chat'] = ""
             
         # debugging
-        for k,v in funcs_to_call.items():
-            print(k, "-> ", end='', flush=True)
-        print()
+        if __DEBUGGING__:
+            for k,v in funcs_to_call.items():
+                print(k, "-> ", end='', flush=True)
+            print()
 
 
-        # function calls must be in order (acquire_history_data before any function that needs history data)
+        # function calls must be in order
         if 'record_user_expenses' in funcs_to_call.keys():
-            output = record_user_expenses_income(agent_executor=model_record_user_expense, user_input=prompt)
-            print("\n--- record_user_expenses()")
+            output = None
+            while output is None:
+                output = record_user_expenses_income(agent_executor=model_record_user_expense, user_input=prompt)
+            print("\n--- record_user_expenses()") if __DEBUGGING__ else None
             print(output)
             formatted_output = "I recorded your expense/income as follows: " + output
             chat_history.append(AIMessage(content=formatted_output))
-            # dont record output to chat_history
+            # must let model know that it recorded the expense
             
         if 'expense_prediction' in funcs_to_call.keys():
-            output = expenses_prediction(client=client, agent_executor=model_expenses_prediction, chat_history=chat_history, user_input=prompt)
-            print("\n--- expenses_prediction()")
+            output = None
+            while output is None:
+                output = expenses_prediction(client=client, agent_executor=model_expenses_prediction, chat_history=chat_history, user_input=prompt)
+            print("\n--- expenses_prediction()") if __DEBUGGING__ else None
             print(output)
             chat_history.append(AIMessage(content=output))
     
         if 'data_analysis' in funcs_to_call.keys():
-            output = data_analysis(client=client, agent_executor=model_data_analysis, chat_history=chat_history, user_input=prompt)
-            print("\n--- data_analysis()")
+            output = None
+            while output is None:
+                output = data_analysis(client=client, agent_executor=model_data_analysis, chat_history=chat_history, user_input=prompt)
+            print("\n--- data_analysis()") if __DEBUGGING__ else None
             print(output)
             chat_history.append(AIMessage(content=output))
     
         # final revert
         if 'regular_chat' in funcs_to_call.keys():
-            output = regular_chat(agent_executor=model_regular_chat, chat_history=chat_history, user_input=prompt)
-            print("\n--- regular_chat()")
+            output = None
+            while output is None:
+                output = regular_chat(agent_executor=model_regular_chat, chat_history=chat_history, user_input=prompt)
+            print("\n--- regular_chat()") if __DEBUGGING__ else None
             print(output)
             chat_history.append(AIMessage(content=output))
-        
-        
-        
-        
 

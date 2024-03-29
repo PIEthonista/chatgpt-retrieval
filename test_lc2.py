@@ -8,12 +8,17 @@
 # export TAVILY_API_KEY=...
 # pip install langchainhub
 # pip install "langserve[all]"
+# pip install numexpr
 
 # langsmith: to debug & inspect what is exactly going on inside the chain/agent. 
 # not needed for now, but helpful for debugging llm chain if required.
 # https://smith.langchain.com/
 # export LANGCHAIN_TRACING_V2="true"
 # export LANGCHAIN_API_KEY="..."
+
+# llm-math
+# https://towardsdatascience.com/building-a-math-application-with-langchain-agents-23919d09a4d3
+# https://python.langchain.com/docs/integrations/chat/huggingface
 
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
