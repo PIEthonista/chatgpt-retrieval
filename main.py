@@ -167,10 +167,11 @@ def regular_chat(agent_executor: AgentExecutor, chat_history, user_input):
         return None
 
 def summarize_text(client: OpenAI, agent_executor: AgentExecutor, chat_history, user_input):
+    formatted_input = "Just assume you are talking to me but not any user, hence any other persona should not be appeared." + "Please summarize the content after this sentence and just reply with the summarization without any other content or responses." + user_input
     try:
         response = agent_executor.invoke({
             "chat_history": chat_history,
-            "input": user_input
+            "input": formatted_input
         })
         output = response['output']
         return output

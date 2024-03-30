@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect, session, url_for
 from flask_cors import CORS, cross_origin
-import pickle
-import joblib
 import json
 from openai import OpenAI
 from api_keys import OPENAI_API_KEY
@@ -163,7 +161,7 @@ def use_model(prompt, chat_history, user_details):
         response_type = 'regular_answer'
 
     # Summarize text
-    summarization = summarize_text(agent_executor=model_summarize_result, chat_history=new_chat_history, user_input=final_output)
+    summarization = summarize_text(client=client, agent_executor=model_summarize_result, chat_history=new_chat_history, user_input=final_output)
 
     return {'response_type': response_type, 'data': data, 'content': final_output, 'summarized_content': summarization}
 
