@@ -8,6 +8,7 @@
 # export TAVILY_API_KEY=...
 # pip install langchainhub
 # pip install "langserve[all]"
+# pip install numexpr
 
 # langsmith: to debug & inspect what is exactly going on inside the chain/agent. 
 # not needed for now, but helpful for debugging llm chain if required.
