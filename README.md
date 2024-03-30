@@ -16,6 +16,12 @@
 - pip install pandas
 - pip install tavily-python
 
+In order to run 'python server.py'
+Please ensure you type 'ipconfig' in terminal - get the ipv4 addess
+Replace the ip address in "CORS(app, resources={r"/_": {"origins": ["http://10.168.105.128:5000", "_"]}})" with the ipv4 address
+You may change the port if you want, but have to ensure the ipv4 address with the port is the same in 'sendMessageToChatGPT.js'
+However, do not change the get_user_response after the ipv4 address
+
 </br>
 
 # API Key file
