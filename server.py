@@ -161,7 +161,10 @@ def use_model(prompt, chat_history, user_details):
         response_type = 'regular_answer'
 
     # Summarize text
-    summarization = summarize_text(client=client, agent_executor=model_summarize_result, chat_history=new_chat_history, user_input=final_output)
+    if final_output is not None:
+        summarization = summarize_text(client=client, agent_executor=model_summarize_result, chat_history=new_chat_history, user_input=final_output)
+    else:
+        summarization = ''
 
     return {'response_type': response_type, 'data': data, 'content': final_output, 'summarized_content': summarization}
 

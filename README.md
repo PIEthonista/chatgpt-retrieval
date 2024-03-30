@@ -22,6 +22,10 @@ Replace the ip address in "CORS(app, resources={r"/_": {"origins": ["http://10.1
 You may change the port if you want, but have to ensure the ipv4 address with the port is the same in 'sendMessageToChatGPT.js'
 However, do not change the get_user_response after the ipv4 address
 
+Please take note that you have to create a file named 'api_keys.py' with 2 keys
+OPENAI_API_KEY = "Your key"
+TAVILY_API_KEY = "Your key"
+
 </br>
 
 # API Key file
