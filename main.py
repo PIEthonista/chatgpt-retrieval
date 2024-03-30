@@ -17,9 +17,13 @@ from langchain.agents import Tool
 
 
 from api_keys import OPENAI_API_KEY, TAVILY_API_KEY
-from system_prompts import AUTOMATED_EXPENSE_RECORDING_SP, DATA_ANALYSIS_SP, EXPENSE_PREDICTION_SP, REGULAR_CHAT_SP
+from system_prompts import AUTOMATED_EXPENSE_RECORDING_SP, DATA_ANALYSIS_SP, EXPENSE_PREDICTION_SP, REGULAR_CHAT_SP, \
+                           PERSONA_GUARDIAN_SP, PERSONA_TEACHER_SP, PERSONA_ADVISOR_SP, \
+                           MODEL_POWERS_SP
 from func_call_template import MANDATORY_FUNCTION_CALL_TEMPLATE, FUNCTION_CALL_TEMPLATE
-from model_config import __MODEL__, __MAX_TOKENS__, __TEMPERATURE__, __VERBOSE__, __USER_DATA_PATH__, __MAX_DATE_RANGE__, __DEBUGGING__, __MAX_ERROR_TRIAL__
+from model_config import __MODEL__, __MAX_TOKENS__, __TEMPERATURE__, __VERBOSE__, __USER_DATA_PATH__, __MAX_DATE_RANGE__, \
+                         __DEBUGGING__, __MAX_ERROR_TRIAL__, \
+                         __PERSONA_TEACHER_AGE__, __PERSONA_GUARDIAN_AGE__, __PERSONA_ADVISOR_AGE__
 from utils import get_csv_given_date
 
 
@@ -106,12 +110,11 @@ def record_user_expenses_income(agent_executor:AgentExecutor, user_input):
         return None
 
 
-
-def init_regular_chat_model():
-    llm_chat = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model=__MODEL__)
+def init_functional_model(system_prompt):
+    llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model=__MODEL__)
     prompt_template = ChatPromptTemplate.from_messages(
         [
-            ("system", REGULAR_CHAT_SP),
+            ("system", system_prompt),
             MessagesPlaceholder("chat_history", optional=True),
             ("human", "{input}"),
             MessagesPlaceholder("agent_scratchpad"),
@@ -121,16 +124,16 @@ def init_regular_chat_model():
     os.environ["TAVILY_API_KEY"] = TAVILY_API_KEY
     search = TavilySearchResults()
     
-    problem_chain = LLMMathChain.from_llm(llm=llm_chat)
+    problem_chain = LLMMathChain.from_llm(llm=llm)
     math_tool = Tool.from_function(name="Calculator",
                     func=problem_chain.run,
                     description="Useful for when you need to answer questions about math. This tool is only for math questions and nothing else. Only input math expressions. Must use this tool whenever end user prompts anythign related to math.")
-    
+
     tools = [search, math_tool]      # must at least has a tool for agent. solution: dont use agent?
-    agent = create_openai_functions_agent(llm_chat, tools, prompt_template)
+    agent = create_openai_functions_agent(llm, tools, prompt_template)
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=__VERBOSE__)
     return agent_executor
-    
+
 
 def regular_chat(agent_executor: AgentExecutor, chat_history, user_input):
     formatted_input = "The current datetime is " + datetime.datetime.now().strftime("%A, %B %d, %Y %H:%M:%S") + ". " + user_input
@@ -145,29 +148,6 @@ def regular_chat(agent_executor: AgentExecutor, chat_history, user_input):
         return None
 
 
-def init_data_analysis_model():
-    llm_data_analysis = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model=__MODEL__)
-    prompt_template = ChatPromptTemplate.from_messages(
-        [
-            ("system", DATA_ANALYSIS_SP),
-            MessagesPlaceholder("chat_history", optional=True),
-            ("human", "{input}"),
-            MessagesPlaceholder("agent_scratchpad"),
-        ]
-    )
-
-    os.environ["TAVILY_API_KEY"] = TAVILY_API_KEY
-    search = TavilySearchResults()
-    
-    problem_chain = LLMMathChain.from_llm(llm=llm_data_analysis)
-    math_tool = Tool.from_function(name="Calculator",
-                    func=problem_chain.run,
-                    description="Useful for when you need to answer questions about math. This tool is only for math questions and nothing else. Only input math expressions. Must use this tool whenever end user prompts anythign related to math.")
-    
-    tools = [search, math_tool]      # must at least has a tool for agent. solution: dont use agent?
-    agent = create_openai_functions_agent(llm_data_analysis, tools, prompt_template)
-    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=__VERBOSE__)
-    return agent_executor
 
 
 def data_analysis(client: OpenAI, agent_executor: AgentExecutor, chat_history, user_input):
@@ -189,30 +169,6 @@ def data_analysis(client: OpenAI, agent_executor: AgentExecutor, chat_history, u
     except:
         return None
 
-
-def init_expenses_prediction_model():
-    llm_expense_prediction = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model=__MODEL__)
-    prompt_template = ChatPromptTemplate.from_messages(
-        [
-            ("system", EXPENSE_PREDICTION_SP),
-            MessagesPlaceholder("chat_history", optional=True),
-            ("human", "{input}"),
-            MessagesPlaceholder("agent_scratchpad"),
-        ]
-    )
-
-    os.environ["TAVILY_API_KEY"] = TAVILY_API_KEY
-    search = TavilySearchResults()
-    
-    problem_chain = LLMMathChain.from_llm(llm=llm_expense_prediction)
-    math_tool = Tool.from_function(name="Calculator",
-                    func=problem_chain.run,
-                    description="Useful for when you need to answer questions about math. This tool is only for math questions and nothing else. Only input math expressions. Must use this tool whenever end user prompts anythign related to math.")
-    
-    tools = [search, math_tool]      # must at least has a tool for agent. solution: dont use agent?
-    agent = create_openai_functions_agent(llm_expense_prediction, tools, prompt_template)
-    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=__VERBOSE__)
-    return agent_executor
 
 
 def expenses_prediction(client: OpenAI, agent_executor: AgentExecutor, chat_history, user_input):
@@ -242,12 +198,47 @@ def expenses_prediction(client: OpenAI, agent_executor: AgentExecutor, chat_hist
 
 
 if __name__ == "__main__":
+    # # hard codes
+    # user_name = "michelle"
+    # user_age = 3
+    # user_mbti = "enfj-t"
+    # user_gender = "female"
+    # user_address = "50603 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur"
+    # user_set_model_name = "Lily"
+    
+    # user_name = "Tom"
+    # user_age = 15
+    # user_mbti = "ENTP"
+    # user_gender = "male"
+    # user_address = "Bukit Mertajam, Pulau Pinang"
+    # user_set_model_name = "Lily"
+    
+    user_name = "Zhi En"
+    user_age = 21
+    user_mbti = "INTJ"
+    user_gender = "female"
+    user_address = "Ipoh"
+    user_set_model_name = "Lily"
+    
+    # preset persona
+    if user_age in range(*__PERSONA_TEACHER_AGE__):
+        persona = PERSONA_TEACHER_SP
+    elif user_age in range(*__PERSONA_GUARDIAN_AGE__):
+        persona = PERSONA_GUARDIAN_SP
+    else:
+        persona = PERSONA_ADVISOR_SP
+    
+    persona = f"Your name is {user_set_model_name}. " + persona + \
+        f" The end user's personal info is as below. Name {user_name}, Age {user_age}, MBTI {user_mbti}, \
+        Gender {user_gender} and is currently living at {user_address}. \
+        Please customise and personalise your responses for the end user based on those."
+    
     # init required models
     client = OpenAI(api_key=OPENAI_API_KEY)
     model_record_user_expense = init_record_user_expense_income_model()
-    model_regular_chat = init_regular_chat_model()
-    model_data_analysis = init_data_analysis_model()
-    model_expenses_prediction = init_expenses_prediction_model()
+    model_regular_chat = init_functional_model(REGULAR_CHAT_SP + " " + MODEL_POWERS_SP + " " + persona)
+    model_data_analysis = init_functional_model(DATA_ANALYSIS_SP + " " + MODEL_POWERS_SP + " " + persona)
+    model_expenses_prediction = init_functional_model(EXPENSE_PREDICTION_SP + " " + MODEL_POWERS_SP + " " + persona)
     
     chat_history = []
     while True:

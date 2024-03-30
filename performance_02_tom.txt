@@ -1,0 +1,59 @@
+(langchain) 🎃 gohyixian chatgpt-retrieval % python main.py
+>>> Prompt: yo! good day!
+
+--- regular_chat()
+Good day, Tom! How can I assist you today?
+>>> Prompt: do you know what's the best option for lunch in town today?
+
+--- regular_chat()
+I recommend looking up local restaurants in Bukit Mertajam, Pulau Pinang for lunch options today. You can check online reviews or ask for recommendations from friends or family members. Enjoy your meal!
+>>> Prompt: can you look them up for me? any special promos?
+
+--- regular_chat()
+I found some options for you in Bukit Mertajam, Pulau Pinang:
+
+1. Taiwanese Palace - Address: 635, Lorong Langsat, 14000 Bukit Mertajam. Operating hours: 11:30am - 3:00pm | 5:30pm - 10:00pm (Closed on Mondays).
+2. Romantic Cafes And Restaurants - Address: 48, Jalan Arumugan Pillai, 14000 Bukit Mertajam. Operating Hours: 10:00 AM - 12:00 AM.
+3. Floating Seafood Paradise - Address: Not specified.
+4. Ong Cheng Huat Seafood - Address: Not specified.
+5. Restoran Boon Kee - Address: Not specified.
+
+You can explore these options for lunch today. Enjoy your meal!
+>>> Prompt: what about options in georgetown? id like to hangout with my gf
+
+--- regular_chat()
+I recommend these romantic spots in Georgetown, Pulau Pinang for a date with your girlfriend:
+
+1. The Safe Room - Address: 2nd Floor, 82, Lebuh Campbell, George Town, 10100 George Town, Pulau Pinang.
+2. Three Sixty Revolving Restaurant & Sky Bar - Address: 25-A, Lebuh Farquhar, George Town, 10200 George Town, Pulau Pinang.
+3. The Canteen At ChinaHouse - Address: 153, Beach St, Georgetown, 10300 George Town, Penang.
+
+These places offer a romantic ambiance for you and your girlfriend to enjoy a lovely time together. Have a wonderful date!
+>>> Prompt: are those options for adults >18?
+
+--- regular_chat()
+Yes, those options are suitable for individuals above 18 years old. It's important to check the age restrictions and policies of each establishment before visiting, especially if they serve alcohol or have specific entry requirements. Enjoy your time in Georgetown!
+>>> Prompt: is it suitable for me?
+
+--- regular_chat()
+As you are 15 years old, it's important to consider age restrictions and policies at certain establishments. The options provided may have age restrictions due to serving alcohol or other factors. It's best to choose a venue that is appropriate for your age to ensure a safe and enjoyable experience. You can look for family-friendly restaurants or activities in Georgetown that cater to a younger audience. If you need more recommendations, feel free to ask!
+>>> Prompt: how much did i spent last 2 weeks?
+data_analysis -> 
+--- model return date
+--- selected date {'start_date': '16-03-2024', 'end_date': '30-03-2024'}
+--- data_csv
+--- data_analysis()
+Based on the data provided, you have spent approximately RM 28,146.64 in the last two weeks. It's important to keep track of your expenses to manage your finances effectively. If you need any tips on budgeting or saving money, feel free to ask!
+>>> Prompt: hmmm with the expense, i dont think i have enough for the outing with my gf, can you propose something cheaper where we both can relax?
+
+--- regular_chat()
+How about having a picnic at a nearby park or beach? You can pack some homemade snacks, sandwiches, and drinks to enjoy together in a peaceful outdoor setting. It's a budget-friendly and romantic way to spend quality time with your girlfriend. Don't forget to bring a blanket or mat to sit on and maybe some music to set the mood. Enjoy your relaxing and affordable outing!
+>>> Prompt: thats a nice idea!
+
+--- regular_chat()
+I'm glad you liked the picnic idea! If you need any more assistance or suggestions, feel free to ask. Enjoy your time with your girlfriend at the park or beach!
+>>> Prompt: is there any clubs available? i dont wanna get caught by my parents tho XDDDD they dont like that
+
+--- regular_chat()
+Given that you are 15 years old and your parents may not approve of you going to clubs, it's important to respect their wishes and prioritize your safety. Instead of going to a club, you can consider alternative activities such as hanging out at a friend's house, watching movies, playing games, or exploring new hobbies together. Remember, it's essential to communicate openly with your parents and make choices that align with their expectations. If you need more ideas for fun and safe activities, feel free to ask!
+>>> Prompt: 

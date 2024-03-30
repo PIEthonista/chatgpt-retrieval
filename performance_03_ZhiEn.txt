@@ -1,0 +1,66 @@
+(langchain) 🎃 gohyixian chatgpt-retrieval % python main.py
+>>> Prompt: hi there!
+
+--- regular_chat()
+Hello Zhi En! How can I assist you today?
+>>> Prompt: what are your abilities?
+
+--- regular_chat()
+Hello Zhi En! I have the ability to help you record expenses and income, analyze your past expense and income data, use your past data to predict future expenses or income, and chat with you about financial topics. I can also help automate the expense and income recording process, browse the internet for real-time information, and perform complex mathematical computations. Feel free to ask me anything related to finance or if you need assistance with managing your expenses and income. How can I help you today?
+>>> Prompt: what is your role here
+
+--- regular_chat()
+Hello Zhi En! As your financial assistant, my role here is to help you with various financial tasks such as recording expenses and income, analyzing your financial data, providing insights into your spending habits, and assisting you in making informed financial decisions. I can also offer guidance on budgeting, saving, investing, and other financial topics. Additionally, I can provide real-time information, perform mathematical calculations, and help you plan for your financial future. Feel free to ask me any questions or seek assistance with your finances. How can I support you today?
+>>> Prompt: hi there!
+
+--- regular_chat()
+Hello Zhi En! How can I assist you today with your finances or any other questions you might have?
+>>> Prompt: i have a friend who just married lately. looking at them, I'm thinking of marrying my bf too. However, i am worried about gfinancial issues given my past 2 weeks' high expenses
+
+--- regular_chat()
+It's understandable to have concerns about financial issues, especially when thinking about major life events like marriage. It's great that you're considering this aspect before taking such a big step. Let's start by looking at your past 2 weeks' expenses. Could you share some details about your expenses during that time? This will help us understand your current financial situation better and see how we can work on managing it effectively.
+>>> Prompt: everytime when we eat out, my partner keeps asking me to pay.. do you think this is reasonable?
+
+--- regular_chat()
+In a relationship, it's important to have open and honest communication about financial matters, including splitting expenses. It's common for couples to take turns or split the bill when eating out. However, if you feel like the financial burden is always falling on you, it's essential to address this issue with your partner.
+
+It's important to have a discussion with your partner about how to fairly split expenses and ensure that both parties are comfortable with the arrangement. Open communication and setting clear expectations can help avoid misunderstandings and resentment in the future.
+
+If you're unsure about how to approach this conversation, I can provide you with some tips on how to navigate this discussion effectively. Let me know if you'd like some guidance on this.
+>>> Prompt: thanks!
+
+--- regular_chat()
+You're welcome! If you have any more questions or need further assistance regarding your finances or any other topic, feel free to ask. I'm here to help!
+>>> Prompt: hi lily
+
+--- regular_chat()
+Hello Zhi En! How can I assist you today? If you have any questions or need help with your finances or any other topic, feel free to let me know.
+>>> Prompt: im currently on a trip at petaling jaya, ss2, staying a night at my partner's house. what promotions on food are there available in ss2 currently?
+
+--- regular_chat()
+I'm unable to provide real-time information on current promotions on food in SS2, Petaling Jaya as the details may change frequently. However, you can check online platforms such as food delivery apps, restaurant websites, or social media pages of eateries in SS2 to find the latest promotions and deals available in the area.
+
+Additionally, you can explore nearby restaurants or cafes in SS2 and inquire directly about any ongoing promotions or special offers they may have. Enjoy your stay at your partner's house and have a wonderful time exploring the food scene in SS2! If you need any more assistance or information, feel free to ask.
+>>> Prompt: can you browse the web for me?
+
+--- regular_chat()
+I'm unable to browse the web in real-time for you. However, if you have any specific questions or need information on a particular topic, feel free to ask, and I'll do my best to provide you with accurate and helpful answers based on my knowledge and resources available. Let me know how I can assist you further!
+>>> Prompt: can you look up the available options for me?
+
+--- regular_chat()
+Here are some options for food promotions in SS2, Petaling Jaya:
+
+1. **[A Foodie's Guide to the Best Eats in SS2, Petaling Jaya - Restaurants, Cafe, Dessert](https://www.augustman.com/my/dining/food/a-foodies-guide-to-the-best-eats-in-ss2-petaling-jaya-restaurants-cafe-dessert/)**: Offers a variety of staples such as fried rice and pasta dishes at the given address with operating hours provided.
+
+2. **[Must-Try Restaurants and Cafes in SS2](https://magazine.foodpanda.my/restaurants-and-cafes-ss2/)**: Provides a list of recommended restaurants and cafes in SS2 with contact information and opening hours.
+
+3. **[Best Food Spots in SS2, Petaling Jaya - Restaurants, Cafe, Dessert](https://www.lifestyleasia.com/sg/travel/asia/est-food-spots-ss2-petaling-jaya-restaurants-cafe-dessert/)**: Features Teochew dishes to soufflés at the mentioned address with contact details.
+
+4. **[Must-Visit Food Spots at The Hub SS2](https://klfoodie.com/must-visit-food-spots-at-the-hub-ss2/)**: Offers a selection of food spots at The Hub SS2 with operating hours and status provided.
+
+You can explore these options to find out more about the current food promotions available in SS2. Enjoy your dining experience in Petaling Jaya! If you need more information or assistance, feel free to ask.
+>>> Prompt: thanks! lgtm!
+
+--- regular_chat()
+You're welcome, Zhi En! If you have any more questions in the future or need assistance with anything else, feel free to reach out. Have a great day and enjoy the rest of your time in Petaling Jaya!
+>>> Prompt: c

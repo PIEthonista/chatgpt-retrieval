@@ -1,0 +1,89 @@
+(langchain) 🎃 gohyixian chatgpt-retrieval % python main.py
+>>> Prompt: hi there!
+
+--- regular_chat()
+Hello Michelle! 🌟 How are you today? Is there anything you would like to learn or talk about?
+>>> Prompt: how can i call you?
+
+--- regular_chat()
+You can call me Lily! 🌸 How can I help you today, Michelle?
+>>> Prompt: what is my age? where do i live at?
+data_analysis -> regular_chat -> 
+--- model return date
+--- selected date {'start_date': '28-02-2024', 'end_date': '30-03-2024'}
+--- data_csv
+--- data_analysis()
+--- regular_chat()
+Since the current datetime is Saturday, March 30, 2024, and you are 3 years old, we can calculate your birth year by subtracting 3 from 2024, which gives us 2021. 
+
+So, Michelle, you were born in the year 2021.
+
+And based on the provided data, you live in Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur.
+
+If you have any more questions or need help with anything else, feel free to ask! 😊
+>>> Prompt: what is a bank?
+
+--- regular_chat()
+A bank is a place where you can keep your money safe and do many other things with your money. It's like a special place that helps you save your money and use it when you need it. 
+
+Banks also help people borrow money to buy things like houses or cars, and they can also help you grow your money by giving you interest. 
+
+So, a bank is like a helpful place for your money! If you have more questions or want to know more, feel free to ask! 😊
+>>> Prompt: what does a bank do?
+
+--- regular_chat()
+A bank is a place where you can keep your money safe and do many other things with your money. It helps you save your money, like putting it in a special piggy bank but even safer! 
+
+Banks also let you take out money when you need it and help you pay for things without using cash. They can also lend you money if you want to buy something big, like a house or a car. 
+
+So, a bank helps you keep your money safe, use it when you need it, and even grow it! If you have more questions or want to know more, feel free to ask! 😊
+>>> Prompt: how can i save money in the bank?
+
+--- regular_chat()
+To save money in the bank, you can follow these simple steps:
+
+1. Ask a grown-up to help you open a bank account. You will need to fill out some forms and provide some information.
+
+2. Once your bank account is open, you can deposit money into it. You can do this by giving the money to the bank teller or using an ATM.
+
+3. Your money will be safe in the bank, and you can watch it grow over time. The bank may even give you some extra money called "interest" for keeping your money there.
+
+4. If you want to save more money, you can keep adding to your bank account whenever you have extra money to save.
+
+Remember, it's always good to save some of your money in the bank for the future! If you have any more questions or need help, feel free to ask! 😊
+>>> Prompt: how much do i need if i wanna have mcd for lunch? what food can i choose in mcd?
+
+--- regular_chat()
+To know how much money you need for lunch at McDonald's, you can check the menu to see the prices of the items you want to order. Usually, a meal at McDonald's can cost around RM10 to RM20, depending on what you choose to eat.
+
+Here are some common food items you can choose from at McDonald's:
+- Cheeseburger
+- Chicken McNuggets
+- French Fries
+- McChicken Burger
+- Filet-O-Fish
+- Big Mac
+- Happy Meal (with a toy!)
+
+You can pick your favorite food items from the menu and check their prices to see how much money you'll need for your McDonald's lunch!
+
+If you have any more questions or need help with anything else, feel free to ask! 😊
+>>> Prompt: wow!
+
+--- regular_chat()
+Wow! That's a cool date and time, isn't it? 🌟 If you have any questions or if there's anything you'd like to learn or talk about, feel free to let me know! I'm here to help you with anything you need. 😊
+>>> Prompt: what are the latest offers on mcd?
+
+--- regular_chat()
+Here are some of the latest offers on McDonald's in Malaysia:
+
+1. **McCafé Half Price Wednesdays:** Enjoy 50% off on all your favorite McCafé delights every Wednesday. This offer is available for ala carte McCafé products through Dine-In, Takeaway, Drive-Thru, and Drive-In.
+
+2. **Everyday Saver Meal:** Get the Everyday Saver Meal starting from RM12.95. Don't miss out on big savings on your McD favorites!
+
+If you want to know more about these offers or if you have any other questions, feel free to ask! 😊
+>>> Prompt: thanks lily!
+
+--- regular_chat()
+You're welcome, Michelle! If you ever need help with anything else or just want to chat, feel free to come back. Have a wonderful day ahead! 😊🌸
+>>> Prompt: 
