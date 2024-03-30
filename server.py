@@ -16,6 +16,7 @@ from model_config import __MODEL__, __MAX_TOKENS__, __TEMPERATURE__, __VERBOSE__
                          __PERSONA_TEACHER_AGE__, __PERSONA_GUARDIAN_AGE__, __PERSONA_ADVISOR_AGE__
 import sys
 from langchain_core.messages import HumanMessage, AIMessage
+import re
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": ["http://172.20.10.4:5000", "*"]}})
@@ -26,6 +27,13 @@ def is_user(history):
         return False
     else:
         return True
+    
+def convert_json(prompt):
+    pattern = r"'(\w+)'\s*:\s*(\d+)"
+    matches = re.findall(pattern, prompt)
+    kv_pairs = {key: int(value) for key, value in matches}
+    json_data = json.dumps(kv_pairs, indent=2)
+    return json_data
     
 def use_model(prompt, chat_history, user_details):
     new_chat_history = []
@@ -86,7 +94,8 @@ def use_model(prompt, chat_history, user_details):
             print(k, "-> ", end='', flush=True)
         print()
 
-
+    response_type = ''
+    data = ''
     # function calls must be in order
     if 'record_user_expenses' in funcs_to_call.keys():
         output = None
@@ -96,9 +105,14 @@ def use_model(prompt, chat_history, user_details):
             c += 1
         print("\n--- record_user_expenses()") if __DEBUGGING__ else None
         print(output)
-        formatted_output = "I recorded your expense/income as follows: " + output
-        new_chat_history.append(AIMessage(content=formatted_output)) if formatted_output is not None else None
-        # must let model know that it recorded the expense
+        if output is not None:
+            formatted_output = "I recorded your expense/income as follows: " + output
+        else:
+            formatted_output = ''
+        new_chat_history.append(AIMessage(content=formatted_output))
+        final_output = formatted_output
+        response_type = 'record_expenses'
+        data = convert_json(output)
         
     if 'expense_prediction' in funcs_to_call.keys():
         output = None
@@ -112,6 +126,8 @@ def use_model(prompt, chat_history, user_details):
             new_chat_history.append(AIMessage(content=output))
         else:
             new_chat_history.append(AIMessage(content=''))
+        final_output = output
+        response_type = 'regular_answer'
 
     if 'data_analysis' in funcs_to_call.keys():
         output = None
@@ -125,6 +141,8 @@ def use_model(prompt, chat_history, user_details):
             new_chat_history.append(AIMessage(content=output))
         else:
             new_chat_history.append(AIMessage(content=''))
+        final_output = output
+        response_type = 'regular_answer'
 
     # final revert
     if 'regular_chat' in funcs_to_call.keys():
@@ -139,8 +157,10 @@ def use_model(prompt, chat_history, user_details):
             new_chat_history.append(AIMessage(content=output))
         else:
             new_chat_history.append(AIMessage(content=''))
+        final_output = output
+        response_type = 'regular_answer'
 
-    return output
+    return {'response_type': response_type, 'data':data, 'content': final_output}
 
 @app.route('/')
 def home():
@@ -153,25 +173,7 @@ def get_user_response():
     user_details = json.loads(request.form.get('user_details'))
     print("DATAAAA: ",user_input)
     updated_result = use_model(user_input, chat_history, user_details)
-    response = {'result': updated_result}
-    return jsonify(response)
-
-@app.route('/get_chat_history')
-def get_chat_history():
-    # Get the key from javascript FormData object
-    # Example in service.js of frontend
-    # const anomalyForm = new FormData();
-    # anomalyForm.append("paragraph", transcription);
-    output = request.form.get('response')
-
-@app.route('/get_data_from_database', methods=['GET'])
-def get_data_from_database():
-    # Get the key from javascript FormData object
-    # Example in service.js of frontend
-    # const anomalyForm = new FormData();
-    # anomalyForm.append("paragraph", transcription);
-    output = request.form.get('response')
-
+    return jsonify(updated_result)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

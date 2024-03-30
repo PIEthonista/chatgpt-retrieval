@@ -26,9 +26,6 @@ from model_config import __MODEL__, __MAX_TOKENS__, __TEMPERATURE__, __VERBOSE__
                          __PERSONA_TEACHER_AGE__, __PERSONA_GUARDIAN_AGE__, __PERSONA_ADVISOR_AGE__
 from utils import get_csv_given_date
 
-
-
-
 def action_layer(client: OpenAI, user_input):
     #     functions = function_call_template,   # <========add this parameter
     #     function_call = 'auto',     # <========add this parameter
