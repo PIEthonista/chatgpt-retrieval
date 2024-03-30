@@ -92,6 +92,29 @@ def init_record_user_expense_income_model():
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=__VERBOSE__)
     return agent_executor
 
+def init_summarize_text_model():
+    llm_record = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model=__MODEL__)
+    prompt_template = ChatPromptTemplate.from_messages(
+        [
+            ("system", AUTOMATED_EXPENSE_RECORDING_SP),
+            MessagesPlaceholder("chat_history", optional=True),
+            ("human", "{input}"),
+            MessagesPlaceholder("agent_scratchpad"),
+        ]
+    )
+
+    os.environ["TAVILY_API_KEY"] = TAVILY_API_KEY
+    search = TavilySearchResults()
+    
+    problem_chain = LLMMathChain.from_llm(llm=llm_record)
+    math_tool = Tool.from_function(name="Calculator",
+                    func=problem_chain.run,
+                    description="Useful for when you need to answer questions about math. This tool is only for math questions and nothing else. Only input math expressions. Must use this tool whenever end user prompts anythign related to math.")
+    
+    tools = [search, math_tool]      # must at least has a tool for agent. solution: dont use agent?
+    agent = create_openai_functions_agent(llm_record, tools, prompt_template)
+    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=__VERBOSE__)
+    return agent_executor
 
 def record_user_expenses_income(agent_executor:AgentExecutor, user_input):
     formatted_input = "The current datetime is " + datetime.datetime.now().strftime("%A, %B %d, %Y %H:%M:%S") + ". " + user_input
@@ -131,7 +154,6 @@ def init_functional_model(system_prompt):
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=__VERBOSE__)
     return agent_executor
 
-
 def regular_chat(agent_executor: AgentExecutor, chat_history, user_input):
     formatted_input = "The current datetime is " + datetime.datetime.now().strftime("%A, %B %d, %Y %H:%M:%S") + ". " + user_input
     try:
@@ -144,8 +166,16 @@ def regular_chat(agent_executor: AgentExecutor, chat_history, user_input):
     except:
         return None
 
-
-
+def summarize_text(client: OpenAI, agent_executor: AgentExecutor, chat_history, user_input):
+    try:
+        response = agent_executor.invoke({
+            "chat_history": chat_history,
+            "input": user_input
+        })
+        output = response['output']
+        return output
+    except:
+        return None
 
 def data_analysis(client: OpenAI, agent_executor: AgentExecutor, chat_history, user_input):
     # call acquire history data

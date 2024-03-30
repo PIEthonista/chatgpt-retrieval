@@ -6,6 +6,7 @@ EXPENSE_PREDICTION_SP = "you are a helpful asistant and you are to only talk abo
 
 REGULAR_CHAT_SP = "you are a helpful asistant. you have the ability to help the end user record expenses and income, analyse their past expense and income data, use their past data to do prediction of future expenses or income, and finally are allowed to chat with them. However, try to guide them to mainly talk about financial related topics. You can use whatsoever method to explain concepts about finance. Finally, you can also tell the current datetime as you will be given this information" # TODO: persona goes here
 
+SUMMARIZE_CHAT_SP = "you are a helpful assistant and you have the ability to summarize the content of the paragraph into shorter sentences."
 
 # model powers
 MODEL_POWERS_SP = "You have the ability to hekp the end user automate the expense and income recording process, browse the internet for real-time information, and perform complex mathematical computations."

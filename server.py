@@ -5,9 +5,9 @@ import joblib
 import json
 from openai import OpenAI
 from api_keys import OPENAI_API_KEY
-from main import init_record_user_expense_income_model, init_functional_model, action_layer, __DEBUGGING__, __MAX_ERROR_TRIAL__, record_user_expenses_income, expenses_prediction, data_analysis, regular_chat
+from main import init_record_user_expense_income_model, init_functional_model, action_layer, __DEBUGGING__, __MAX_ERROR_TRIAL__, record_user_expenses_income, expenses_prediction, data_analysis, regular_chat, summarize_text
 from api_keys import OPENAI_API_KEY, TAVILY_API_KEY
-from system_prompts import AUTOMATED_EXPENSE_RECORDING_SP, DATA_ANALYSIS_SP, EXPENSE_PREDICTION_SP, REGULAR_CHAT_SP, \
+from system_prompts import AUTOMATED_EXPENSE_RECORDING_SP, DATA_ANALYSIS_SP, EXPENSE_PREDICTION_SP, REGULAR_CHAT_SP, SUMMARIZE_CHAT_SP, \
                            PERSONA_GUARDIAN_SP, PERSONA_TEACHER_SP, PERSONA_ADVISOR_SP, \
                            MODEL_POWERS_SP
 from func_call_template import MANDATORY_FUNCTION_CALL_TEMPLATE, FUNCTION_CALL_TEMPLATE
@@ -72,6 +72,7 @@ def use_model(prompt, chat_history, user_details):
     model_regular_chat = init_functional_model(REGULAR_CHAT_SP + " " + MODEL_POWERS_SP + " " + persona)
     model_data_analysis = init_functional_model(DATA_ANALYSIS_SP + " " + MODEL_POWERS_SP + " " + persona)
     model_expenses_prediction = init_functional_model(EXPENSE_PREDICTION_SP + " " + MODEL_POWERS_SP + " " + persona)
+    model_summarize_result = init_functional_model(SUMMARIZE_CHAT_SP + " " + MODEL_POWERS_SP + " " + persona)
         
     # append to chat history
     new_chat_history.append(HumanMessage(content=prompt))
@@ -161,7 +162,10 @@ def use_model(prompt, chat_history, user_details):
         final_output = output
         response_type = 'regular_answer'
 
-    return {'response_type': response_type, 'data': data, 'content': final_output}
+    # Summarize text
+    summarization = summarize_text(agent_executor=model_summarize_result, chat_history=new_chat_history, user_input=final_output)
+
+    return {'response_type': response_type, 'data': data, 'content': final_output, 'summarized_content': summarization}
 
 @app.route('/')
 def home():
