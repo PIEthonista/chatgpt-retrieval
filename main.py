@@ -279,7 +279,7 @@ if __name__ == "__main__":
             print("\n--- record_user_expenses()") if __DEBUGGING__ else None
             print(output)
             formatted_output = "I recorded your expense/income as follows: " + output
-            chat_history.append(AIMessage(content=formatted_output))
+            chat_history.append(AIMessage(content=formatted_output)) if formatted_output is not None else None
             # must let model know that it recorded the expense
             
         if 'expense_prediction' in funcs_to_call.keys():
@@ -290,7 +290,7 @@ if __name__ == "__main__":
                 c += 1
             print("\n--- expenses_prediction()") if __DEBUGGING__ else None
             print(output)
-            chat_history.append(AIMessage(content=output))
+            chat_history.append(AIMessage(content=output)) if output is not None else None
     
         if 'data_analysis' in funcs_to_call.keys():
             output = None
@@ -300,7 +300,7 @@ if __name__ == "__main__":
                 c += 1
             print("\n--- data_analysis()") if __DEBUGGING__ else None
             print(output)
-            chat_history.append(AIMessage(content=output))
+            chat_history.append(AIMessage(content=output)) if output is not None else None
     
         # final revert
         if 'regular_chat' in funcs_to_call.keys():
@@ -311,5 +311,5 @@ if __name__ == "__main__":
                 c += 1
             print("\n--- regular_chat()") if __DEBUGGING__ else None
             print(output)
-            chat_history.append(AIMessage(content=output))
+            chat_history.append(AIMessage(content=output)) if output is not None else None
 

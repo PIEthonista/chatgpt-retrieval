@@ -1,8 +1,8 @@
 __VERBOSE__ = True
 __DEBUGGING__ = True
 
-__MODEL__ = "gpt-3.5-turbo"
-# __MODEL__ = "gpt-4"  # stronger when facing more complex function-call-requiring prompts
+# __MODEL__ = "gpt-3.5-turbo"
+__MODEL__ = "gpt-4"  # stronger when facing more complex function-call-requiring prompts
 __MAX_TOKENS__ = 1024
 __TEMPERATURE__ = 0
 
