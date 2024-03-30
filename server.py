@@ -17,9 +17,10 @@ from model_config import __MODEL__, __MAX_TOKENS__, __TEMPERATURE__, __VERBOSE__
 import sys
 from langchain_core.messages import HumanMessage, AIMessage
 import re
+import datetime
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://172.20.10.4:5000", "*"]}})
+CORS(app, resources={r"/*": {"origins": ["http://10.168.105.128:5000", "*"]}})
 
 def is_user(history):
     user = history['user']
@@ -160,7 +161,7 @@ def use_model(prompt, chat_history, user_details):
         final_output = output
         response_type = 'regular_answer'
 
-    return {'response_type': response_type, 'data':data, 'content': final_output}
+    return {'response_type': response_type, 'data': data, 'content': final_output}
 
 @app.route('/')
 def home():
